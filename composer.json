@@ -1,0 +1,19 @@
+{
+    "name": "trismegiste/symfony-prelude",
+    "description": "A lightweight template kernel for Symfony2 with auto-install script",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Trismegiste"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-0": {
+            "Trismegiste\\Prelude\\": "src"
+        }
+    },
+    "require": {
+        "php": ">=5.4.3"
+    }
+}
