@@ -15,5 +15,12 @@
     },
     "require": {
         "php": ">=5.4.3"
+    },
+    "require-dev": {
+        "symfony/symfony": "2.3.*",
+        "twig/extensions": "1.0.*",
+        "symfony/assetic-bundle": "2.3.*",
+        "symfony/monolog-bundle": "2.3.*",
+        "sensio/distribution-bundle": "2.3.*"
     }
 }

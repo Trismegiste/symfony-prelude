@@ -3,3 +3,5 @@
 /nbproject/
 /doc/coverage
 /doc/tech
+/tests/example/cache
+/tests/example/logs

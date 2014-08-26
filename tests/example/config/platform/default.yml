@@ -1,0 +1,4 @@
+## YAML Template.
+parameters:
+    locale: en
+    secret: idic
