@@ -2,7 +2,7 @@
 An easy way to start a Symfony app
 
 ## What
-Ths small lib does 3 things :
+This small lib does 3 things :
 
 * Provides a fat-free kernel for Symfony 2 with only essential bundles
 * Provides an auto-installer script for platform-specific parameters
@@ -16,6 +16,21 @@ It starts for 3 reasons :
 * the lost so many times of the infamous parameters.yml
 * the AppKernel class is not [OCP][1]
 * customizing parameters automatically between a team
+
+## Example
+In the end, the Kernel looks like :
+```
+use Trismegiste\Prelude\Kernel;
+
+class AppKernel extends Kernel
+{
+    protected function registerAdditionalBundles()
+    {
+        return [];
+    }
+}
+```
+See through the [phpunit tests][3] or the social network app [iinano][2]
 
 ## When
 Before you start to mess your AppKernel and parameters.yml. When you don't need
@@ -35,3 +50,4 @@ Nonetheless, you can use both in the same project.
 
 [1]: http://en.wikipedia.org/wiki/Open/closed_principle
 [2]: https://github.com/Trismegiste/iinano/tree/master/app/AppKernel.php
+[3]: https://github.com/Trismegiste/symfony-prelude/blob/master/tests/example/AppKernel.php
