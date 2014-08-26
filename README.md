@@ -33,5 +33,5 @@ Only the file for the production server needs to be in gitignore.
 
 Nonetheless, you can use both in the same project.
 
-[1]: http://
-[2]: https://github.com/Trismegiste/iinano/branch/master/app/AppKernel.php
+[1]: http://en.wikipedia.org/wiki/Open/closed_principle
+[2]: https://github.com/Trismegiste/iinano/tree/master/app/AppKernel.php
