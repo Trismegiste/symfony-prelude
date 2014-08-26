@@ -1,4 +1,4 @@
-# Prelude to Symfony
+# Prelude to Symfony [![Build Status](https://travis-ci.org/Trismegiste/symfony-prelude.svg?branch=master)](https://travis-ci.org/Trismegiste/symfony-prelude)
 An easy way to start a Symfony app
 
 ## What
