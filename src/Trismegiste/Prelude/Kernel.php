@@ -8,7 +8,7 @@ namespace Trismegiste\Prelude;
 
 use Symfony\Component\HttpKernel\Kernel as SymfonyKernel;
 use Symfony\Component\Config\Loader\LoaderInterface;
-use Trismegiste\Prelude\Composer\InstallApp;
+use Trismegiste\Prelude\Composer\Script;
 
 /**
  * This is a Template Method for a Symfony Kernel
@@ -54,7 +54,7 @@ abstract class Kernel extends SymfonyKernel
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
         $loader->load($this->rootDir . '/config/config_' . $this->getEnvironment() . '.yml');
-        $loader->import($this->rootDir . '/config/platform/' . InstallApp::getPlatformName() . '.yml');
+        $loader->import($this->rootDir . Script::getPlatformSubdir() . Script::getPlatformName() . '.yml');
     }
 
     /**

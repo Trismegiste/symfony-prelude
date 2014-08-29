@@ -15,7 +15,6 @@ class InstallAppTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $sut;
-    static protected $subDir = '/config/platform/';
     protected $generated;
 
     protected function setUp()
@@ -27,20 +26,20 @@ class InstallAppTest extends \PHPUnit_Framework_TestCase
                 ->method('ask')
                 ->will($this->returnValue('myValue'));
 
-        $baseDir = sys_get_temp_dir() . static::$subDir;
+        $baseDir = sys_get_temp_dir();
         if (!file_exists($baseDir)) {
             mkdir($baseDir, 0777, true);
         }
         $defaultCfg['parameters'] = ['oneParam' => 'defaultValue'];
         $dest = $baseDir . 'default.yml';
         file_put_contents($dest, \Symfony\Component\Yaml\Yaml::dump($defaultCfg));
-        $this->generated = $baseDir . InstallApp::getPlatformName() . '.yml';
+        $this->generated = $baseDir . 'dummy' . '.yml';
         // make sure old tests are deleted
         if (file_exists($this->generated)) {
             unlink($this->generated);
         }
 
-        $this->sut = new InstallApp(sys_get_temp_dir(), $console);
+        $this->sut = new InstallApp(sys_get_temp_dir(), $console, 'dummy');
     }
 
     public function testExecute()

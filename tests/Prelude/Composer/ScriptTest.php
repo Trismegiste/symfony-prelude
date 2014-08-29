@@ -22,7 +22,7 @@ class ScriptTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $this->tempDir = sys_get_temp_dir();
-        $baseDir = $this->tempDir . static::$subDir;
+        $baseDir = $this->tempDir . Script::getPlatformSubdir();
         if (!file_exists($baseDir)) {
             mkdir($baseDir, 0777, true);
         }

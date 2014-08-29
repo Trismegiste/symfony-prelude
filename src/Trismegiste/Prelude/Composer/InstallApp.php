@@ -19,19 +19,21 @@ use Symfony\Component\Yaml\Yaml;
 class InstallApp
 {
 
-    protected $symfonyAppDir;
+    protected $symfonyCfgDir;
     protected $composerIO;
+    protected $platformName;
 
     /**
      * Ctor
      * 
-     * @param string $directory the symfony AppKernel directory
+     * @param string $directory the symfony subdirectory for platform config files
      * @param ConsoleIO $io the composer IO console
      */
-    public function __construct($directory, ConsoleIO $io)
+    public function __construct($directory, ConsoleIO $io, $platformName)
     {
-        $this->symfonyAppDir = $directory;
+        $this->symfonyCfgDir = $directory;
         $this->composerIO = $io;
+        $this->platformName = $platformName;
     }
 
     /**
@@ -39,12 +41,11 @@ class InstallApp
      */
     public function execute()
     {
-        $plateformDir = $this->symfonyAppDir . '/config/platform/';
+        $plateformDir = $this->symfonyCfgDir;
         $template = $plateformDir . 'default.yml';
-        $platformName = static::getPlatformName();
-        $dest = $plateformDir . $platformName . '.yml';
+        $dest = $plateformDir . $this->platformName . '.yml';
         if (!file_exists($dest)) {
-            $this->composerIO->write("<info>Configuring parameters for $platformName :</info>");
+            $this->composerIO->write("<info>Configuring parameters for {$this->platformName} :</info>");
 
             $defaultParam = Yaml::parse($template);
             foreach ($defaultParam['parameters'] as $key => $val) {
@@ -56,16 +57,6 @@ class InstallApp
 
             $this->composerIO->write("Writing parameters to <comment>$dest</comment>");
         }
-    }
-
-    /**
-     * Gets the platform's name
-     * 
-     * @return string
-     */
-    static public function getPlatformName()
-    {
-        return php_uname('n');
     }
 
 }
