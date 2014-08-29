@@ -15,6 +15,7 @@ class InstallAppTest extends \PHPUnit_Framework_TestCase
 {
 
     protected $sut;
+    protected $baseDir;
 
     protected function setUp()
     {
@@ -25,17 +26,16 @@ class InstallAppTest extends \PHPUnit_Framework_TestCase
                 ->method('ask')
                 ->will($this->returnValue('myValue'));
 
-        $this->sut = new InstallApp(sys_get_temp_dir(), $console, 'dummy');
+        $this->baseDir = sys_get_temp_dir() . '/';
+        $this->sut = new InstallApp($this->baseDir, $console, 'dummy');
     }
 
     public function testExecute()
     {
-        $baseDir = sys_get_temp_dir();
-
         $defaultCfg['parameters'] = ['oneParam' => 'defaultValue'];
-        $dest = $baseDir . 'default.yml';
+        $dest = $this->baseDir . 'default.yml';
         file_put_contents($dest, \Symfony\Component\Yaml\Yaml::dump($defaultCfg));
-        $generated = $baseDir . 'dummy' . '.yml';
+        $generated = $this->baseDir . 'dummy' . '.yml';
         // make sure old tests are deleted
         if (file_exists($generated)) {
             unlink($generated);
@@ -51,7 +51,7 @@ class InstallAppTest extends \PHPUnit_Framework_TestCase
 
     public function testMissingConfig()
     {
-        unlink(sys_get_temp_dir() . 'default.yml');
+        unlink($this->baseDir . 'default.yml');
         $this->sut->execute();
     }
 
