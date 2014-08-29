@@ -32,16 +32,22 @@ class KernelTest extends WebTestCase
         unlink(static::$tmpFile);
     }
 
-    public function testKernelTest()
+    public function getDifferentConfig()
     {
-        $client = self::createClient(['environment' => 'test', 'debug' => true]);
-        $this->assertCount(7, $client->getKernel()->getBundles());
+        return [
+            ['test', 7],
+            ['prod', 5],
+            ['dev', 7]
+        ];
     }
 
-    public function testKernelProd()
+    /**
+     * @dataProvider getDifferentConfig
+     */
+    public function testKernel($name, $cardinal)
     {
-        $client = self::createClient(['environment' => 'prod', 'debug' => true]);
-        $this->assertCount(5, $client->getKernel()->getBundles());
+        $client = self::createClient(['environment' => $name, 'debug' => true]);
+        $this->assertCount($cardinal, $client->getKernel()->getBundles());
     }
 
 }

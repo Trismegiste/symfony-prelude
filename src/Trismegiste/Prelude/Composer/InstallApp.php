@@ -43,6 +43,10 @@ class InstallApp
     {
         $plateformDir = $this->symfonyCfgDir;
         $template = $plateformDir . 'default.yml';
+        if (!file_exists($template)) {
+            $this->composerIO->write("<error>default configuration is missing in {$this->symfonyCfgDir}</error>");
+        }
+
         $dest = $plateformDir . $this->platformName . '.yml';
         if (!file_exists($dest)) {
             $this->composerIO->write("<info>Configuring parameters for {$this->platformName} :</info>");
