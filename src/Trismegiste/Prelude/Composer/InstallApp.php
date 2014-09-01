@@ -28,6 +28,7 @@ class InstallApp
      * 
      * @param string $directory the symfony subdirectory for platform config files
      * @param ConsoleIO $io the composer IO console
+     * @param string $platformName the name of the computer running this app
      */
     public function __construct($directory, ConsoleIO $io, $platformName)
     {
@@ -42,9 +43,17 @@ class InstallApp
     public function execute()
     {
         $plateformDir = $this->symfonyCfgDir;
+        if (!file_exists($plateformDir)) {
+            $this->composerIO->write("<error>Configuration directory $plateformDir is missing</error>");
+            
+            return;
+        }
+
         $template = $plateformDir . 'default.yml';
         if (!file_exists($template)) {
-            $this->composerIO->write("<error>default configuration is missing in {$this->symfonyCfgDir}</error>");
+            $this->composerIO->write("<error>Default configuration is missing in $plateformDir</error>");
+            
+            return;
         }
 
         $dest = $plateformDir . $this->platformName . '.yml';
